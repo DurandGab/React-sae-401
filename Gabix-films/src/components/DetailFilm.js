@@ -61,7 +61,7 @@ export default function DetailFilm(props) {
                       pt: "2%"
                     }}
                     image={film.logo}
-                    alt="random"
+                    alt="Affiche du Film"
                     height="800px"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>

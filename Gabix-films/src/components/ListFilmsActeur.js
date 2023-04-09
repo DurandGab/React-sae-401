@@ -17,6 +17,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
 
 export default function ListFilmsActeur(props){
     const url ="http://gabixfilms.mmicastres.fr/public/api/acteurs/" + props.pid + "/films";
@@ -34,15 +35,16 @@ export default function ListFilmsActeur(props){
     });
   }, [])
   return(
+    
     <Container component="main">
       <main>
-      <Typography variant="h4">Listes des acteurs principaux</Typography>
+      <Typography variant="h4">Ses films joués</Typography>
         <Container sx={{ py: 2 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
             {films.map((f) => (
               <Grid item key={f.titre} xs={12} sm={6} md={4}>
-                {/* <Link to={"/detailacteur/" + a.id_acteur}> */}
+                <Link to={"/detailfilm/" + f.titre}>
                 <Card
                   sx={{
                     height: "100%",
@@ -57,7 +59,7 @@ export default function ListFilmsActeur(props){
                       pt: "2%"
                     }}
                     image={f.logo}
-                    alt="img_acteur"
+                    alt="affiche du film"
                     height="200px"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
@@ -65,16 +67,17 @@ export default function ListFilmsActeur(props){
                       {f.titre}
                     </Typography>
                     <Typography>
-                      {f.categories}
+                      {f.nom_categorie} - {f.nom_genre}
                     </Typography>
                   </CardContent>
                 </Card>
-                {/* </Link> */}
+                </Link>
               </Grid>
             ))}
           </Grid>
         </Container>
       </main>
     </Container>
+    
   )
 }
