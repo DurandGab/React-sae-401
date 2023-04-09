@@ -1,0 +1,10 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+a {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
