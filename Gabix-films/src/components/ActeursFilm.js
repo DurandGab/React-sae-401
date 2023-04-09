@@ -18,54 +18,31 @@ import Container from "@mui/material/Container";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-
-export default function Films(props) {
-
-  const url="http://gabixfilms.mmicastres.fr/public/api/films"
-  const url_result = "http://gabixfilms.mmicastres.fr/public/api/films?search="
-  const [listeFilms, setFilms] = useState([]);
+export default function ActeursFilm(props){
+    const url ="http://gabixfilms.mmicastres.fr/public/api/films/" + props.ptitre + "/acteurs";
+  const [acteur, setActeur] = useState([]);
   useEffect(() => {
-    const fetchOptions = { method: "GET" };
-    //const critere = "jardin";
-    if(props.pcritere){
-      fetch(url_result + props.pcritere, fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        console.log(dataJSON);
-        setFilms(dataJSON);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }else{
-      fetch(url ,fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        console.log(dataJSON);
-        setFilms(dataJSON);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-    
-  }, [props.pcritere]);
-
-
-  return (
-    
+  const fetchOptions = { method: "GET" };
+  //const critere = "jardin";
+  fetch(url , fetchOptions)
+    .then((response) => {
+      return response.json();
+    })
+    .then((dataJSON) => {
+      setActeur(dataJSON);
+      console.log(dataJSON)
+    });
+  }, [])
+  return(
     <Container component="main">
       <main>
+      <Typography variant="h4">Listes des acteurs principaux</Typography>
         <Container sx={{ py: 2 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {listeFilms.map((f) => (
-              <Grid item key={f.titre} xs={12} sm={6} md={4}>
-                <Link to={"/detailfilm/" + f.titre}>
+            {acteur.map((a) => (
+              <Grid item key={a.id_acteur} xs={12} sm={6} md={4}>
+                <Link to={"/detailacteur/" + a.id_acteur}>
                 <Card
                   sx={{
                     height: "100%",
@@ -79,16 +56,16 @@ export default function Films(props) {
                       // 16:9
                       pt: "2%"
                     }}
-                    image={f.logo}
-                    alt="random"
-                    height="400px"
+                    image={a.img_acteur}
+                    alt="img_acteur"
+                    height="200px"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {f.titre}
+                      {a.nom}
                     </Typography>
                     <Typography>
-                      {f.nom_categorie} - {f.nom_genre}
+                      {a.genre}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -99,6 +76,5 @@ export default function Films(props) {
         </Container>
       </main>
     </Container>
-    
-  );
+  )
 }

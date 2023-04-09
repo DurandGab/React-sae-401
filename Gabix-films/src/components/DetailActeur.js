@@ -17,55 +17,36 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Box } from "@mui/material";
+import ActeursView from "../views/ActeursView"
+import CritiqueView from "../views/CritiqueView"
+import ListFilmsActeurView from "../views/ListFilmsActeurView"
+export default function DetailActeur(props) {
 
+  
 
-export default function Films(props) {
-
-  const url="http://gabixfilms.mmicastres.fr/public/api/films"
-  const url_result = "http://gabixfilms.mmicastres.fr/public/api/films?search="
-  const [listeFilms, setFilms] = useState([]);
+  const url ="http://gabixfilms.mmicastres.fr/public/api/acteurs/" + props.pid;
+  const [acteur, setActeur] = useState({});
   useEffect(() => {
-    const fetchOptions = { method: "GET" };
-    //const critere = "jardin";
-    if(props.pcritere){
-      fetch(url_result + props.pcritere, fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        console.log(dataJSON);
-        setFilms(dataJSON);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }else{
-      fetch(url ,fetchOptions)
-      .then((response) => {
-        return response.json();
-      })
-      .then((dataJSON) => {
-        console.log(dataJSON);
-        setFilms(dataJSON);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    }
-    
-  }, [props.pcritere]);
-
-
+  const fetchOptions = { method: "GET" };
+  //const critere = "jardin";
+  fetch(url , fetchOptions)
+    .then((response) => {
+      return response.json();
+    })
+    .then((dataJSON) => {
+      setActeur(dataJSON);
+      console.log(dataJSON)
+    });
+  }, [])
   return (
-    
     <Container component="main">
       <main>
         <Container sx={{ py: 2 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {listeFilms.map((f) => (
-              <Grid item key={f.titre} xs={12} sm={6} md={4}>
-                <Link to={"/detailfilm/" + f.titre}>
+            
+              <Grid item key={acteur.id_acteur} xs={12} sm={12} md={12}>
                 <Card
                   sx={{
                     height: "100%",
@@ -79,26 +60,38 @@ export default function Films(props) {
                       // 16:9
                       pt: "2%"
                     }}
-                    image={f.logo}
+                    image={acteur.img_acteur}
                     alt="random"
-                    height="400px"
+                    height="500px"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {f.titre}
+                  <Box display="flex" alignItems="center">
+                    <Box sx={{ flex: 1 }}>
+                      <Typography sx={{textAlign:"start", py:1}} gutterBottom variant="h5" component="h2">
+                      <span style={{ fontWeight: "bold" }}>Nom/Prenom :</span> {acteur.nom}
                     </Typography>
-                    <Typography>
-                      {f.nom_categorie} - {f.nom_genre}
+                  </Box>
+
+                  <Box sx={{ flex: 1, marginLeft: "20px", textAlign:"end" }}>
+                    <Typography sx={{ py:1}}>
+                    <span style={{ fontWeight: "bold" }}>Pays : </span>{acteur.nom_pays}
                     </Typography>
+                  </Box>
+                </Box>
+                    
+                  
+                    
+                
+                    <Typography sx={{textAlign:"start", py:2}}>
+                    <span style={{ fontWeight: "bold" }}>Biographie :</span> {acteur.biographie}
+                    </Typography>
+                    <ListFilmsActeurView></ListFilmsActeurView>
                   </CardContent>
                 </Card>
-                </Link>
               </Grid>
-            ))}
           </Grid>
         </Container>
       </main>
     </Container>
-    
   );
 }

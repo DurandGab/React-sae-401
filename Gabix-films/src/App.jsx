@@ -15,6 +15,7 @@ import LoginView from "./views/LoginView";
 import IdentView from "./views/IdentView";
 import Footer from "./views/Footer";
 import DetailView from "./views/DetailView";
+import DetailActeurView from "./views/DetailActeurView";
 
 import Container from "@mui/material/Container";
 
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/" element={<AccueilView />} />
             <Route path="/films" element={<FilmsView />} />
             <Route path="/detailfilm/:titre" element={<DetailView />} />
+            <Route path="/detailacteur/:id_acteur" element={<DetailActeurView />} />
             <Route path="/prix" element={<PrixView />} />
             <Route path="/dispo" element={<DispoView />} />
 
