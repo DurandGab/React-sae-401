@@ -6,7 +6,7 @@ import ResponsiveAppBar from "./views/ResponsiveAppBar";
 import AccueilView from "./views/AccueilView";
 import FilmsView from "./views/FilmsView";
 import PrixView from "./views/PrixView";
-import DispoView from "./views/DispoView";
+import AjoutView from "./views/AjoutView";
 import ProfileView from "./views/ProfileView";
 import AccountView from "./views/AccountView";
 import DashboardView from "./views/DashboardView";
@@ -30,11 +30,15 @@ export default function App() {
             <Route path="/films" element={<FilmsView />} />
             <Route path="/detailfilm/:titre" element={<DetailView />} />
             <Route path="/detailacteur/:id_acteur" element={<DetailActeurView />} />
+
+
             <Route path="/prix" element={<PrixView />} />
-            <Route path="/dispo" element={<DispoView />} />
+            <Route path="/ajoutfilm" element={<AjoutView />} />
 
             <Route path="/login" element={<LoginView />} />
             <Route path="/ident" element={<IdentView />} />
+
+
             <Route path="/profil" element={<ProfileView />} />
             <Route path="/account" element={<AccountView />} />
             <Route path="/dashboard" element={<DashboardView />} />
