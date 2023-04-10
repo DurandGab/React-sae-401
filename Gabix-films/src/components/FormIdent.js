@@ -64,11 +64,11 @@ export default function FormIdent() {
               <TextField
                 required
                 fullWidth
-                id="email"
-                type="email"
+                id="mail"
+                type="mail"
                 label="Mail"
-                name="email"
-                autoComplete="email"
+                name="mail"
+                autoComplete="mail"
               />
             </Grid>
             <Grid item xs={12}>
@@ -88,6 +88,16 @@ export default function FormIdent() {
                 label="Mot de passe"
                 type="password"
                 id="mdp"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                fullWidth
+                id="img_profil"
+                type="url"
+                label="URL avatar"
+                name="img_profil"
               />
             </Grid>
           </Grid>
