@@ -9,18 +9,31 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+
 import { Link } from "react-router-dom";
 
 export default function FormIdent() {
+  const url ="http://gabixfilms.mmicastres.fr/public/api/identuser"
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    window.location.href="/login"
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password")
-    });
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        window.location.href="/login"
+      });
   };
 
+  
   return (
     <Container component="main" maxWidth="xs">
       <Box

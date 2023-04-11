@@ -94,11 +94,6 @@ function ResponsiveAppBar() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to={"/films"}>
-                  <Typography textAlign="center">Accueil</Typography>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
                 <Link to={"/favoris"}>
                   <Typography textAlign="center">Favoris</Typography>
                 </Link>
@@ -134,14 +129,6 @@ function ResponsiveAppBar() {
           {/* ==========  menu de gauche mais affiché dans la navbar
              si la taille de l'écran est assez grande = md */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Link to={"/films"}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                Accueil
-              </Button>
-            </Link>
             <Link to={"/favoris"}>
               <Button
                 onClick={handleCloseNavMenu}
