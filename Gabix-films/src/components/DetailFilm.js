@@ -100,6 +100,9 @@ export default function DetailFilm(props) {
 
                     <ActeursView></ActeursView>
                     <CritiqueView></CritiqueView>
+                    <Link to="/ajoutcritique/">
+                      <button>Ajouter une critique</button>
+                    </Link>
                   </CardContent>
                 </Card>
               </Grid>

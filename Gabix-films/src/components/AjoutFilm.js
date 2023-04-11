@@ -96,7 +96,7 @@ export default function AjoutFilm() {
       >
         
         <Typography component="h1" variant="h5">
-          Ajouter quelque chose à regarder
+          Ajoutez quelque chose à regarder
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
@@ -219,7 +219,7 @@ export default function AjoutFilm() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Ajouter de quoi regarder
+            Ajouter
           </Button>
           
         </Box>

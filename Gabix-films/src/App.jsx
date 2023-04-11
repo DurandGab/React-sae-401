@@ -16,6 +16,7 @@ import IdentView from "./views/IdentView";
 import Footer from "./views/Footer";
 import DetailView from "./views/DetailView";
 import DetailActeurView from "./views/DetailActeurView";
+import AjoutCritiqueView from "./views/ajoutCritiqueView"
 
 import Container from "@mui/material/Container";
 
@@ -30,7 +31,7 @@ export default function App() {
             <Route path="/films" element={<FilmsView />} />
             <Route path="/detailfilm/:titre" element={<DetailView />} />
             <Route path="/detailacteur/:id_acteur" element={<DetailActeurView />} />
-
+            <Route path="/ajoutcritique" element={<AjoutCritiqueView />} />
 
             <Route path="/prix" element={<PrixView />} />
             <Route path="/ajoutfilm" element={<AjoutView />} />
