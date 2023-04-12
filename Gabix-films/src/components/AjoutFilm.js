@@ -10,37 +10,92 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useState, useEffect } from "react";
 import { MenuItem } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {Select, InputLabel} from "@mui/material";
 
-export default function AjoutFilm() {
+export default function AjoutFilm(props) {
+
+  const [ajoutFilm, setAjoutFilm] = useState({})
   const handleSubmit = (event) => {
+    //const [dataUser, setDataUser] = useState([]);
+    
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password")
-    });
+    
+   const data = {titre:SelectedTitre, age_min:SelectedAge, realisateur:SelectedRea, logo:SelectedAffiche, date_sortie:SelectedDate,duree:SelectedDuree , synopsis:SelectedSynopsis, id_categorie:SelectedCategorie, id_genre:SelectedGenres, id_pays:selectedPays}
+    data.id_utilisateur=props.userid
+    console.log(data)
+    
+      fetch("https://gabix-films.herokuapp.com/public/api/film/ajout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data);
+        setAjoutFilm(data)
+       
+      });
+    
   };
 
+
+  const [SelectedTitre, setSelectedTitre] = useState('');
+  const handleChangeTitre = (event) => {
+    setSelectedTitre(event.target.value);
+  };
+
+  const [SelectedAge, setSelectedAge] = useState('');
+  const handleChangeAge = (event) => {
+    setSelectedAge(event.target.value);
+  };
+
+  const [SelectedRea, setSelectedRea] = useState('');
+  const handleChangeRea = (event) => {
+    setSelectedRea(event.target.value);
+  };
+
+  const [SelectedAffiche, setSelectedAffiche] = useState('');
+  const handleChangeAff = (event) => {
+    setSelectedAffiche(event.target.value);
+  };
+
+  const [SelectedDate, setSelectedDate] = useState('');
+  const handleChangeDate = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const [SelectedDuree, setSelectedDuree] = useState('');
+  const handleChangeDuree = (event) => {
+    setSelectedDuree(event.target.value);
+  };
+
+  const [SelectedSynopsis, setSelectedSynopsis] = useState('');
+  const handleChangeSyn = (event) => {
+    setSelectedSynopsis(event.target.value);
+  };
+
+
+ const [SelectedCategorie, setSelectedCategories] = useState('');
   const handleChangeCat = (event) => {
     setSelectedCategories(event.target.value);
   };
 
+ const [SelectedGenres, setSelectedGenres] = useState('');
   const handleChangeGen = (event) => {
     setSelectedGenres(event.target.value)
   };
 
+ const [selectedPays, setSelectedPays] = useState('');
   const handleChangePays = (event) => { 
     setSelectedPays(event.target.value)
   };
 
- const urlcat = "https://gabixfilms.mmicastres.fr/public/api/categories"
- const urlgen = "https://gabixfilms.mmicastres.fr/public/api/genres"
- const urlpays ="https://gabixfilms.mmicastres.fr/public/api/pays"
 
+ const urlcat = "https://gabix-films.herokuapp.com/public/api/categories"
  const [categories, setCategories] = useState([]);
- const [SelectedCategorie, setSelectedCategories] = useState('');
   useEffect(() => {
   const fetchOptions = { method: "GET" };
   //const critere = "jardin";
@@ -54,8 +109,9 @@ export default function AjoutFilm() {
     });
   }, [])
 
+  const urlgen = "https://gabix-films.herokuapp.com/public/api/genres"
   const [genres, setGenres] = useState([]);
-  const [SelectedGenres, setSelectedGenres] = useState('');
+  
   useEffect(() => {
   const fetchOptions = { method: "GET" };
   //const critere = "jardin";
@@ -69,8 +125,10 @@ export default function AjoutFilm() {
     });
   }, [])
 
+
+  const urlpays ="https://gabix-films.herokuapp.com/public/api/pays"
   const [pays, setPays] = useState([]);
-  const [selectedPays, setSelectedPays] = useState('');
+  
   useEffect(() => {
   const fetchOptions = { method: "GET" };
   //const critere = "jardin";
@@ -83,6 +141,8 @@ export default function AjoutFilm() {
       console.log(dataJSON)
     });
   }, [])
+
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -98,10 +158,11 @@ export default function AjoutFilm() {
         <Typography component="h1" variant="h5">
           Ajoutez quelque chose à regarder
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+              onChange={handleChangeTitre}
                 autoComplete="given-name"
                 name="titre"
                 required
@@ -113,6 +174,7 @@ export default function AjoutFilm() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+              onChange={handleChangeAge}
                 required
                 fullWidth
                 id="age_min"
@@ -123,6 +185,7 @@ export default function AjoutFilm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={handleChangeRea}
                 required
                 fullWidth
                 id="realisateur"
@@ -133,6 +196,7 @@ export default function AjoutFilm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={handleChangeAff}
                 required
                 fullWidth
                 id="logo"
@@ -143,6 +207,7 @@ export default function AjoutFilm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={handleChangeDate}
                 required
                 fullWidth
                 type="date"
@@ -152,8 +217,18 @@ export default function AjoutFilm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={handleChangeDuree}
+                required
+                fullWidth
+                id="duree"
+                name="duree"
+                label="Duree (hh:mm:ss)"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                onChange={handleChangeSyn}
                 multiline
-                
                 required
                 fullWidth
                 name="synopsis"
@@ -172,7 +247,7 @@ export default function AjoutFilm() {
                 onChange={handleChangeCat}    
                 >
                 {categories.map((categorie) => (
-                    <MenuItem key={categorie.id_categorie} value={categorie.nom_categorie}>
+                    <MenuItem key={categorie.id_categorie} value={categorie.id_categorie}>
                     {categorie.nom_categorie}
                     </MenuItem>
                  ))}
@@ -189,7 +264,7 @@ export default function AjoutFilm() {
                 onChange={handleChangeGen}
                 >
                 {genres.map((genre) => (
-                    <MenuItem key={genre.id_genre} value={genre.nom_genre}>
+                    <MenuItem key={genre.id_genre} value={genre.id_genre}>
                     {genre.nom_genre}
                     </MenuItem>
       ))}
@@ -206,7 +281,7 @@ export default function AjoutFilm() {
                 onChange={handleChangePays}
                 >
                 {pays.map((p) => (
-                    <MenuItem key={p.id_pays} value={p.nom_pays}>
+                    <MenuItem key={p.id_pays} value={p.id_pays}>
                     {p.nom_pays}
                     </MenuItem>
       ))}

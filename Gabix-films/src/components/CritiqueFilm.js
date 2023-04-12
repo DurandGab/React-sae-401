@@ -19,7 +19,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function CritiqueFilm(props){
-    const url ="http://gabixfilms.mmicastres.fr/public/api/films/" + props.ptitre + "/critiques";
+    const url ="https://gabix-films.herokuapp.com/public/api/films/" + props.ptitre + "/critiques";
   const [critique, setCritique] = useState([]);
   useEffect(() => {
   const fetchOptions = { method: "GET" };

@@ -25,7 +25,7 @@ export default function DetailActeur(props) {
 
   
 
-  const url ="http://gabixfilms.mmicastres.fr/public/api/acteurs/" + props.pid;
+  const url ="https://gabix-films.herokuapp.com/public/api/acteurs/" + props.pid;
   const [acteur, setActeur] = useState({});
   useEffect(() => {
   const fetchOptions = { method: "GET" };

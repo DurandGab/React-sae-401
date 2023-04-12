@@ -3,7 +3,7 @@ import AjoutFilm from "../components/AjoutFilm"
 export default function AjoutView() {
   return (
     <div>
-      <AjoutFilm></AjoutFilm>
+      <AjoutFilm userid={1}></AjoutFilm>
     </div>
   );
 }

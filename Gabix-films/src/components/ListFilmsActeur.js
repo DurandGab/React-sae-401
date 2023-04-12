@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 
 export default function ListFilmsActeur(props){
-    const url ="http://gabixfilms.mmicastres.fr/public/api/acteurs/" + props.pid + "/films";
+    const url ="https://gabix-films.herokuapp.com/public/api/acteurs/" + props.pid + "/films";
   const [films, setFilms] = useState([]);
   useEffect(() => {
   const fetchOptions = { method: "GET" };

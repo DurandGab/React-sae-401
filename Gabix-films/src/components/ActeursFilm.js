@@ -19,7 +19,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function ActeursFilm(props){
-    const url ="http://gabixfilms.mmicastres.fr/public/api/films/" + props.ptitre + "/acteurs";
+    const url ="https://gabix-films.herokuapp.com/public/api/films/" + props.ptitre + "/acteurs";
   const [acteur, setActeur] = useState([]);
   useEffect(() => {
   const fetchOptions = { method: "GET" };
@@ -63,9 +63,6 @@ export default function ActeursFilm(props){
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {a.nom}
-                    </Typography>
-                    <Typography>
-                      {a.genre}
                     </Typography>
                   </CardContent>
                 </Card>

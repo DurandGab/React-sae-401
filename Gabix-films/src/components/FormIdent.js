@@ -8,28 +8,39 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useState } from "react";
 
 
 import { Link } from "react-router-dom";
 
 export default function FormIdent() {
-  const url ="http://gabixfilms.mmicastres.fr/public/api/identuser"
+  
+  const [dataUser, setDataUser] = useState({});
+  const [inscription, setInscription] = useState({})
+  const updateData = (event) => {
+    setDataUser({
+      ...dataUser,
+      [event.target.name]: event.target.value,
+    });
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    window.location.href="/login"
-    const data = new FormData(event.currentTarget);
-    fetch(url, {
+    console.log(dataUser)
+    fetch("https://gabix-films.herokuapp.com/public/api/identuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: data,
+      body: JSON.stringify(dataUser),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        window.location.href="/login"
+        setInscription(data)
+        navitage("/login")
+        // window.location.href="/login"
       });
   };
 
@@ -50,10 +61,11 @@ export default function FormIdent() {
         <Typography component="h1" variant="h5">
           S'enregistrer
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+              onChange={updateData}
                 autoComplete="given-name"
                 name="prenom"
                 required
@@ -65,6 +77,7 @@ export default function FormIdent() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+              onChange={updateData}
                 required
                 fullWidth
                 id="nom"
@@ -75,6 +88,7 @@ export default function FormIdent() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={updateData}
                 required
                 fullWidth
                 id="mail"
@@ -86,6 +100,7 @@ export default function FormIdent() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={updateData}
                 required
                 fullWidth
                 type="date"
@@ -95,6 +110,7 @@ export default function FormIdent() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={updateData}
                 required
                 fullWidth
                 name="mdp"
@@ -105,6 +121,7 @@ export default function FormIdent() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+              onChange={updateData}
                 required
                 fullWidth
                 id="img_profil"

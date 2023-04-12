@@ -20,12 +20,13 @@ import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import ActeursView from "../views/ActeursView"
 import CritiqueView from "../views/CritiqueView"
+import AjoutCritiqueView from "../views/AjoutCritiqueView";
 
 export default function DetailFilm(props) {
 
-  
+  const titre = props.ptitre
 
-  const url ="http://gabixfilms.mmicastres.fr/public/api/films/" + props.ptitre;
+  const url ="https://gabix-films.herokuapp.com/public/api/films/" + props.ptitre;
   const [film, setFilms] = useState({});
   useEffect(() => {
   const fetchOptions = { method: "GET" };
@@ -100,9 +101,7 @@ export default function DetailFilm(props) {
 
                     <ActeursView></ActeursView>
                     <CritiqueView></CritiqueView>
-                    <Link to="/ajoutcritique/">
-                      <button>Ajouter une critique</button>
-                    </Link>
+                    <AjoutCritiqueView ptitre={titre}></AjoutCritiqueView>
                   </CardContent>
                 </Card>
               </Grid>

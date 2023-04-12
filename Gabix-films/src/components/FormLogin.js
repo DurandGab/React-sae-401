@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import {useEffect, useState} from "react"
 export default function SignIn() {
 
-  const url="http://gabixfilms.mmicastres.fr/public/api/user"
+  const url="https://gabix-films.herokuapp.com/public/api/user"
 
   const [data, setData] = useState({});
 
@@ -41,6 +41,9 @@ export default function SignIn() {
           console.log(data);
           if (data.status === 1) {
             console.log(data.user)
+            // window.location.href="/films"
+            
+
           }
         });
     };

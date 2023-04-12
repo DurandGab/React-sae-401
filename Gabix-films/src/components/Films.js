@@ -21,8 +21,8 @@ import { Link } from "react-router-dom";
 
 export default function Films(props) {
 
-  const url="http://gabixfilms.mmicastres.fr/public/api/films"
-  const url_result = "http://gabixfilms.mmicastres.fr/public/api/films?search="
+  const url="https://gabix-films.herokuapp.com/public/api/films"
+  const url_result = "https://gabix-films.herokuapp.com/public/api/films?search="
   const [listeFilms, setFilms] = useState([]);
   useEffect(() => {
     const fetchOptions = { method: "GET" };

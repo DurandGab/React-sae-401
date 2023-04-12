@@ -31,7 +31,6 @@ export default function App() {
             <Route path="/films" element={<FilmsView />} />
             <Route path="/detailfilm/:titre" element={<DetailView />} />
             <Route path="/detailacteur/:id_acteur" element={<DetailActeurView />} />
-            <Route path="/ajoutcritique" element={<AjoutCritiqueView />} />
 
             <Route path="/prix" element={<PrixView />} />
             <Route path="/ajoutfilm" element={<AjoutView />} />
